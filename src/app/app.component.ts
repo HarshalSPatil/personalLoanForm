@@ -90,7 +90,7 @@ export class AppComponent implements OnInit {
     this.resendtime = second.subscribe(res => {
 
 
-      if (res >= 3) {
+      if (res >= 180) {
         this.resendtime.unsubscribe();
         this.resenddisable = false;
 
@@ -112,8 +112,6 @@ export class AppComponent implements OnInit {
   public resend: boolean = true;
   public resenddisable: boolean = false;
   public verify: boolean = true;
-  showmsg: boolean = false;
-  showmsg2: boolean = false;
 
   resendtime: Subscription;
 
@@ -142,7 +140,7 @@ export class AppComponent implements OnInit {
     this.resendtime = second.subscribe(res => {
 
 
-      if (res >= 3) {
+      if (res >= 180) {
         this.resendtime.unsubscribe();
         this.resenddisable = false;
       }
@@ -182,7 +180,7 @@ export class AppComponent implements OnInit {
 
         }
         else {
-          this.showmsg2 = true;
+        
         }
       },
       err => {
@@ -190,11 +188,6 @@ export class AppComponent implements OnInit {
       }
     )
 
-  }
-
-
-  closemsg2() {
-    this.showmsg2 = false;
   }
 
 

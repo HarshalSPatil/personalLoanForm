@@ -22,10 +22,7 @@
         <h4 style="padding-top: 5px;">Verification Form</h4>
       </div>
      
-      <div *ngIf="showmsg2"  class="alert alert-success alert-dismissible fade show">
-        <button (click)="closemsg2()" type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>OTP Not Match!</strong>.
-      </div>
+      
       <div class="form-outline mb-4">
         <label class="form-label" for="city">City</label>
         <input type="text" formControlName="city" class="form-control"
@@ -69,11 +66,13 @@
       </div>
 
 
-      <div class="form-outline mb-4">
+      <div class="form-outline mb-4 ">
         <label class="form-label" for="mobile">Mobile</label>
-        <input type="text" formControlName="mobile" maxlength="10" class="form-control"
+        <div class="row">
+        <input type="text" name="mobilepre" style="max-width:60px; margin-left: 15px;" class="form-control col-sm" value="91+" disabled/>
+        <input type="text" formControlName="mobile" maxlength="10" class="form-control col-sm" style="margin-right: 15px;"
           [ngClass]="{ 'is-invalid': (f.mobile.touched || submitted) &&(f.mobile.errors) }" />
-
+        </div>
         <div *ngIf="(f.mobile.touched || submitted) &&(f.mobile.errors)" class="invalid-feedback">
           <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
           <div *ngIf="f.mobile.errors.pattern">Mobile must be a valid</div>
