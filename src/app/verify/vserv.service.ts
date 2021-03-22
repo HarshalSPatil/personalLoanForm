@@ -5,7 +5,7 @@ import {Observable} from 'rxjs'
 @Injectable({
   providedIn: 'root'
 })
-export class DataapiService {
+export class VservService {
 
   constructor(private http:HttpClient) { }
   sendservice(fromdata:FormData):Observable<any>

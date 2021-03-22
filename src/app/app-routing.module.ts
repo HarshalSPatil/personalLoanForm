@@ -1,7 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import {VerifyComponent} from './verify/verify.component'
 
-const routes: Routes = [];
+const routes: Routes = [
+  {
+    path:"verify",
+    component:VerifyComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

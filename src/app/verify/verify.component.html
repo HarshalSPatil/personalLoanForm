@@ -1,0 +1,117 @@
+<html lang="en">
+<head>
+  <title></title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+<body>
+
+
+
+<form enctype="multipart/form-data" [formGroup]="myform">
+  
+  <div class="justify-content-center V" >
+
+    <div class="V2">
+      <div class="V3" >
+        <h4 style="padding-top: 5px;">Verification Form</h4>
+      </div>
+     
+      
+      <div class="form-outline mb-4">
+        <label class="form-label" for="city">City</label>
+        <input type="text" formControlName="city" class="form-control"
+          [ngClass]="{ 'is-invalid': f.city.touched && f.city.errors }" />
+
+        <div *ngIf="f.city.touched && f.city.errors" class="invalid-feedback">
+          <div *ngIf="f.city.errors.required">City is required</div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="panNumber">Pan Number</label>
+        <input type="text" formControlName="panNumber" maxlength="10" class="form-control"
+          [ngClass]="{ 'is-invalid': (f.panNumber.touched || submitted) &&(f.panNumber.errors) }" />
+
+        <div *ngIf="(f.panNumber.touched || submitted) &&(f.panNumber.errors)" class="invalid-feedback">
+          <div *ngIf="f.panNumber.errors.required">Pan Number is required</div>
+          <div *ngIf="f.panNumber.errors.pattern">Pan Number must be a valid Pan Number</div>
+        </div>
+      </div>
+      <div class="form-outline mb-4">
+        <label class="form-label" for="fullname">Full Name</label>
+        <input type="text" formControlName="fullname" maxlength="140" class="form-control"
+          [ngClass]="{ 'is-invalid': (f.fullname.touched || submitted) &&(f.fullname.errors) }" />
+
+        <div *ngIf="(f.fullname.touched || submitted) &&(f.fullname.errors)" class="invalid-feedback">
+          <div *ngIf="f.fullname.errors.required">Full Name is required</div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label class="form-label" for="email">Email</label>
+        <input type="text" formControlName="email" class="form-control"
+          [ngClass]="{ 'is-invalid': (f.email.touched || submitted) &&(f.email.errors)}" />
+        <div *ngIf="(f.email.touched || submitted) &&(f.email.errors)" class="invalid-feedback">
+          <div *ngIf="f.email.errors.required">Email is required</div>
+          <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+
+
+      </div>
+
+
+      <div class="form-outline mb-4 ">
+        <label class="form-label" for="mobile">Mobile</label>
+        <div class="row">
+        <input type="text" name="mobilepre" class="form-control col-sm pre" value="91+" disabled/>
+        <input type="text" formControlName="mobile" maxlength="10" class="form-control col-sm" style="margin-right: 15px;"
+          [ngClass]="{ 'is-invalid': (f.mobile.touched || submitted) &&(f.mobile.errors) }" />
+        </div>
+        <div *ngIf="(f.mobile.touched || submitted) &&(f.mobile.errors)" class="invalid-feedback">
+          <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
+          <div *ngIf="f.mobile.errors.pattern">Mobile must be a valid</div>
+        </div>
+      </div>
+
+      <div class="form-outline mb-4">
+        <label [hidden]='otptxt' class="form-label" for="otp">OTP</label>
+        <input type="text" formControlName="otp" [hidden]='otptxt' maxlength="4" minlength="4" class="form-control"
+          [ngClass]="{ 'is-invalid': (f.otp.touched) &&(f.otp.errors) }" />
+
+        <div *ngIf="(f.otp.touched) &&(f.otp.errors)" class="invalid-feedback">
+          <div *ngIf="f.otp.errors.required">Please Enter OTP</div>
+          <div *ngIf="f.otp.errors.pattern">OTP must be a valid</div>
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <div class="col d-flex justify-content-center">
+
+          <button type="submit" (click)="submitotp()" [disabled]="myform.invalid || getotp" name="getotp" id="getotp"
+            class="btn btn-success btn-block">Get OTP</button>
+
+        </div>
+
+        <div class="col">
+          <div *ngIf="c>3;then one else two"> </div>
+
+          <ng-template #one>
+            <h6 style="color: red;">Please try again after an hour</h6>
+          </ng-template>
+          <ng-template #two>
+            <button type="submit" (click)="onSubmitresend()" [hidden]='resend' [disabled]='resenddisable'
+              name="resend" id="resend" class="btn btn-danger btn-block">Resend OTP</button>
+          </ng-template>
+        </div>
+      </div>
+
+      <button [disabled]='verify||myform.invalid' (click)="verifyotp()"
+        class="btn btn-primary btn-block">Verify</button>
+    </div>
+  </div>
+
+</form>
+</body>
+</html>
+

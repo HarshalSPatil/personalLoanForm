@@ -1,3 +1,35 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+a {
+    color:white;
+    text-decoration: none;
+}
+a:hover
+{
+    color:white;
+    text-decoration: none;
+
+}
+.V{
+    width: 50%; 
+    height: auto;
+    margin-left: 25%;
+    margin-right: 25%;
+}
+.V2{
+    padding-left: 15%;padding-right: 15%;margin-top: 5%;
+}
+.V3
+{
+ height: 40px;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  text-align: center; 
+  background-color:cornflowerblue;
+  color: cornsilk;
+}
+.pre
+{
+    max-width:60px; margin-left: 15px;
+}

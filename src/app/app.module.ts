@@ -4,11 +4,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http'
-import {DataapiService} from './dataapi.service'
+import { VservService } from './verify/vserv.service'
 import { from } from 'rxjs';
+import { VerifyComponent } from './verify/verify.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VerifyComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +20,7 @@ import { from } from 'rxjs';
     HttpClientModule
   ],
   providers: [
-    DataapiService
+    VservService
   ],
   bootstrap: [AppComponent]
 })
