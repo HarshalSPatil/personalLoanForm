@@ -86,7 +86,7 @@ export class AppComponent implements OnInit {
     this.resend = false;
     this.verify = false;
     this.resenddisable = true;
-    const second = interval(1000);
+    const second = interval(10000);
     this.resendtime = second.subscribe(res => {
 
 
@@ -136,7 +136,7 @@ export class AppComponent implements OnInit {
     this.resend = false;
     this.verify = false;
     this.resenddisable = true;
-    const second = interval(1000);
+    const second = interval(10000);
     this.resendtime = second.subscribe(res => {
 
 
