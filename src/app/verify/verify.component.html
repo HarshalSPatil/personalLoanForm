@@ -67,13 +67,13 @@
         <input type="text" name="mobilepre" class="form-control col-sm pre" value="91+" disabled/>
         <input type="text" formControlName="mobile" maxlength="10" class="form-control col-sm" style="margin-right: 15px;"
           [ngClass]="{ 'is-invalid': (f.mobile.touched || submitted) &&(f.mobile.errors) }" />
-        </div>
-        <div *ngIf="(f.mobile.touched || submitted) &&(f.mobile.errors)" class="invalid-feedback">
+      
+        <div *ngIf="(f.mobile.touched || submitted) &&(f.mobile.errors)" class="invalid-feedback margl">
           <div *ngIf="f.mobile.errors.required">Mobile Number is required</div>
           <div *ngIf="f.mobile.errors.pattern">Mobile must be a valid</div>
         </div>
       </div>
-
+  </div>
       <div class="form-outline mb-4">
         <label [hidden]='otptxt' class="form-label" for="otp">OTP</label>
         <input type="text" formControlName="otp" [hidden]='otptxt' maxlength="4" minlength="4" class="form-control"

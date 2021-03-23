@@ -6,6 +6,12 @@ const routes: Routes = [
   {
     path:"verify",
     component:VerifyComponent
+  },
+  {
+    path:"",
+   redirectTo:"verify",
+   pathMatch:"full"
+   
   }
 ];
 
