@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { interval, SubscribableOrPromise, Subscription } from 'rxjs';
+import { interval, SubscribableOrPromise, Subscription, timer } from 'rxjs';
 import { VservService } from './vserv.service'
 import Swal from 'sweetalert2'
-
 @Component({
   selector: 'app-verify',
   templateUrl: './verify.component.html',
@@ -13,7 +12,16 @@ export class VerifyComponent implements OnInit {
 
 
   myform: FormGroup;
-  submitted = false;
+  c: number = 0;
+  count2: number = 0;
+  public getotp: boolean = false;
+  public otptxt: boolean = true;
+  public resend: boolean = true;
+  public resenddisable: boolean = false;
+  public verify: boolean = true;
+
+  resendtime: Subscription;
+
 
 
 
@@ -37,10 +45,11 @@ export class VerifyComponent implements OnInit {
   data
   mobil
   Fullname
+
   get f() { return this.myform.controls; }
 
   onSubmit() {
-    this.submitted = true;
+  
 
     // stop here if form is invalid
     if (this.myform.invalid) {
@@ -51,7 +60,7 @@ export class VerifyComponent implements OnInit {
       res => {
         console.log(res);
         Swal.fire('OTP Send Successfully')
-
+      
       },
       err => {
         console.log(err);
@@ -59,12 +68,13 @@ export class VerifyComponent implements OnInit {
     )
   }
   onSubmitresend() {
-    this.submitted = true;
+
     this.data = JSON.stringify(this.myform.value)
     this.dataservice.sendservice(this.data).subscribe(
       res => {
         console.log(res);
         Swal.fire('OTP Resend Successfully')
+    
       },
       err => {
         console.log(err);
@@ -86,7 +96,7 @@ export class VerifyComponent implements OnInit {
     this.resend = false;
     this.verify = false;
     this.resenddisable = true;
-    const second = interval(10000);
+    const second = interval(1000);
     this.resendtime = second.subscribe(res => {
 
 
@@ -104,18 +114,7 @@ export class VerifyComponent implements OnInit {
   }
 
 
-  //counting resend button click and making it disable after each 3 minutes
-  c: number = 0;
-  count2: number = 0;
-  public getotp: boolean = false;
-  public otptxt: boolean = true;
-  public resend: boolean = true;
-  public resenddisable: boolean = false;
-  public verify: boolean = true;
-
-  resendtime: Subscription;
-
-
+  
 
   submitotp() {
 
@@ -136,7 +135,7 @@ export class VerifyComponent implements OnInit {
     this.resend = false;
     this.verify = false;
     this.resenddisable = true;
-    const second = interval(10000);
+    const second = interval(1000);
     this.resendtime = second.subscribe(res => {
 
 
@@ -152,6 +151,7 @@ export class VerifyComponent implements OnInit {
   resendButtonDisabledFunction() {
     this.resenddisable = true;
   }
+  
 
   verifyotp() {
     this.mobil = {
@@ -159,7 +159,7 @@ export class VerifyComponent implements OnInit {
       otp: this.myform.get('otp').value
     }
 
-    this.dataservice.sendservice(this.mobil).subscribe(
+    this.dataservice.sendverify(this.mobil).subscribe(
       res => {
         console.log(res);
         if (res.statusCode === 200) {
@@ -167,17 +167,25 @@ export class VerifyComponent implements OnInit {
           this.resend = true;
           this.verify = true;
           this.resenddisable = false;
-          this.submitted = false;
           this.c = 0;
-
-          Swal.fire(
+          this.otptxt = true;
+          this.getotp=false;
+          this.myform.reset({
+            panNumber:'',
+            city: '',
+            fullname: '',
+            email: '',
+            mobile: '',
+            otp: '0000'
+      
+          })
+      
+       Swal.fire(
             'Thank you for verification!',
-            this.Fullname,
+             this.Fullname,
             'success'
           )
-          this.myform.reset({});
-          this.otptxt = false;
-
+        
         }
         else {
         
@@ -191,6 +199,6 @@ export class VerifyComponent implements OnInit {
   }
 
 
-
+  
 
 }

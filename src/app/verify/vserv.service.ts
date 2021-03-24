@@ -13,4 +13,9 @@ export class VservService {
     return this.http.post<any>('http://lab.thinkoverit.com/api/getOTP.php',fromdata)
 
   }
+  sendverify(otpsend:FormData):Observable<any>
+  {
+    return this.http.post<any>('http://lab.thinkoverit.com/api/verifyOTP.php',otpsend)
+
+  }
 }
